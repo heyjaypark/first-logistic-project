@@ -2,14 +2,14 @@ package product.model;
 
 import java.util.Date;
 
-public class Member {
+public class Product {
 	
 	private String id;
 	private String name;
 	private String password;
 	private Date regDate;
 	
-	public Member(String id, String name, String password, Date regDate) {
+	public Product(String id, String name, String password, Date regDate) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
