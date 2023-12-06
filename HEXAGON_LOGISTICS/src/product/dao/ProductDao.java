@@ -8,9 +8,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import jdbc.JdbcUtil;
-import member.model.Member;
+import product.model.Member;
 
-public class MemberDao {
+public class ProductDao {
 	
 	public Member selectById(Connection conn, String id) throws SQLException {
 		PreparedStatement pstmt = null;
