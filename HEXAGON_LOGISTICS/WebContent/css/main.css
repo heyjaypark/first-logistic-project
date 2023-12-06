@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+header h1 {
+  text-align: center;
+}
+
+footer{
+text-align:center;
+}
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  section {
+    position: relative;
+    background-color: #f5f5dc; /* 엷은 베이지색 배경 */
+	padding: 20px; /* 적절한 여백 추가 */
+  }
+
+  /* 버튼 스타일 추가 */
+  button {
+    margin: 5px;
+    position: absolute;
+    background-color: #7f8c8d; /* 버튼 배경색을 회색으로 지정 */
+    border: none;
+    border-radius: 50%; /* 동그란 모양으로 만들기 */
+    width: 20px; /* 버튼의 가로 크기 */
+    height: 20px; /* 버튼의 세로 크기 */
+    cursor: pointer;
+    overflow: hidden; /* 내부의 그림자 효과를 감추기 위해 overflow 속성 추가 */
+  }
+
+  /* 광택 효과 스타일 추가 */
+  button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5); /* 투명한 흰색 배경 */
+    border-radius: 50%; /* 동그란 모양으로 만들기 */
+    transform: translate(-50%, -50%) scale(0); /* 초기에는 크기를 0으로 설정 */
+    transition: transform 0.3s ease-in-out; /* 애니메이션 효과 추가 */
+  }
+
+  button:hover::before {
+    transform: translate(-50%, -50%) scale(1); /* 호버 시 광택이 나타나도록 크기를 1로 변경 */
+  }
+
+  #introBtn {
+    right: 90px;
+    bottom: 5px;
+  }
+
+  #stockManageBtn {
+    right: 60px; /* 예시로 각 버튼 간격을 조절할 수 있습니다. */
+    bottom: 5px;
+  }
+
+  #salesBtn {
+    right: 30px; /* 예시로 각 버튼 간격을 조절할 수 있습니다. */
+    bottom: 5px;
+  }
+
+  #stockListBtn {
+    right: 0px; /* 예시로 각 버튼 간격을 조절할 수 있습니다. */
+    bottom: 5px;
+  }
+
+  #imageDisplay {
+    margin: 30px;
+    text-align: center;
+  }
+  
+nav {
+  display: flex;
+  justify-content: center; /* 좌우 여백을 최대로 확보하고 버튼을 오른쪽으로 정렬 */
+  align-items: center; /* 수직 정렬을 위해 추가 */
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      margin: 0;
+    }
+
+    nav li {
+      margin: 0 50px; /* 메뉴 간 간격 조절 */
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 15px 40px; /* 위아래 여백, 좌우 여백 */
+      border-radius: 10px; /* 모서리 둥글게 만들기 */
+      background-color: #3498db; /* 배경 색상 */
+      color: #fff; /* 글자색 */
+      transition: background-color 0.3s ease; /* 배경 색상 변경 효과 */
+    }
+
+    nav a:hover {
+      background-color: #2980b9; /* 호버 시 배경 색상 변경 */
+    }
+    
+#loginButton {
+float: right;
+}
+
+#loginButton a {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+}
+
+#loginButton a:hover {
+  background-color: #2980b9;
+}
+
+    
