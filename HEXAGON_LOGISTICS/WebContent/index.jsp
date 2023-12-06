@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
+           
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +18,16 @@
 <header>
 <h1>Hexagon Logistics ver 1.0</h1>
     <div id="loginButton">
-    <a href="login.jsp">로그인</a>
+    <u:notLogin>
+    <a href="login.do">로그인</a>
+    </u:notLogin>
+    <u:isLogin>
+    ${authUser.name}님, 안녕하세요.
+<a href="logout.do">[로그아웃하기]</a>
+<!-- <a href="changePwd.do">[암호변경하기]</a> -->
+</u:isLogin>
+
+
   </div>
 </header>
 
