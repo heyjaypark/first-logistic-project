@@ -36,7 +36,7 @@
     <li><a href="#">재고현황</a></li>
     <li><a href="#">재고관리</a></li>
     <li><a href="#">판매/이력</a></li>
-    <li><a href="#">공지사항</a></li>
+    <li><a href="list.do">공지사항</a></li>
   </ul>
 
 </nav>

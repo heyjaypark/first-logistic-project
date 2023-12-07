@@ -13,8 +13,8 @@
 		<param-name>poolConfig</param-name>
 		<param-value>
 jdbcdriver=oracle.jdbc.driver.OracleDriver
-jdbcUrl=jdbc:oracle:thin:@localhost:1521:orcl
-dbUser=sh
+jdbcUrl=jdbc:oracle:thin:@localhost:1521:xe
+dbUser=system
 dbPass=1234
 validationQuery=select1
 minIdle=3
@@ -57,8 +57,13 @@ poolName=board
 
 	<filter-mapping>
 		<filter-name>LoginCheckFilter</filter-name>
-		<url-pattern></url-pattern>
+<url-pattern>/write.do</url-pattern>
+<url-pattern>/modify.do</url-pattern>
 	</filter-mapping>
+
+
+
+
 
 	<servlet>
 		<servlet-name>imageServlet</servlet-name>
