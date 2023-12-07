@@ -14,8 +14,8 @@ public class ArticleContentDao {
 	throws SQLException{
 		PreparedStatement pstmt = null;
 		try {
-			pstmt=conn.prepareStatement("insert into article_content (article_no,content) values (s_article_content_list.nextval,?)");
-			
+			pstmt=conn.prepareStatement("insert into article_content (article_no,content) values (s_article_list_content.nextval,?)");
+			//게시글 read오류 시 sequence s_article_list_content와 ArticleDao안의 s_article_list가 일치하는지 반드시 확인후 삭제 및 새로생성!!
 			pstmt.setString(1, content.getContent());
 			int insertedCount = pstmt.executeUpdate();
 			if(insertedCount>0) {
@@ -56,6 +56,15 @@ public class ArticleContentDao {
 			try(PreparedStatement pstmt= conn.prepareStatement("update article_content set content = ? where article_no = ?")){
 				pstmt.setString(1, content);
 				pstmt.setInt(2, no);
+				return pstmt.executeUpdate();
+				
+					
+			}
+		}
+		
+		public int delete(Connection conn, int no, String content) throws SQLException{
+			try(PreparedStatement pstmt= conn.prepareStatement("delete from article_content where article_no = ?")){
+				pstmt.setInt(1, no);
 				return pstmt.executeUpdate();
 				
 					

@@ -22,7 +22,7 @@ public class ArticleDao {
 		try {
 			pstmt = conn.prepareStatement(
 					"insert into article (article_no,writer_id, writer_name, title, regdate, moddate, read_cnt) values (s_article_list.nextval,?,?,?,?,?,0)");
-
+			//게시글 read오류 시 sequence s_article_list와 ArticleContentDao안의 s_article_list_content가 일치하는지 반드시 확인후 삭제 및 새로생성!!
 			pstmt.setString(1, article.getWriter().getId());
 			pstmt.setString(2, article.getWriter().getName());
 			pstmt.setString(3, article.getTitle());
@@ -140,7 +140,7 @@ public void increaseReadCount(Connection conn, int no) throws SQLException{
 }
 
 public int update(Connection conn, int no, String title) throws SQLException{
-	try(PreparedStatement pstmt= conn.prepareStatement("update article set title = ?, moddate=now() where article_no = ?")){
+	try(PreparedStatement pstmt= conn.prepareStatement("update article set title = ?, moddate=sysdate where article_no = ?")){
 		pstmt.setString(1, title);
 		pstmt.setInt(2, no);
 		return pstmt.executeUpdate();
@@ -149,6 +149,14 @@ public int update(Connection conn, int no, String title) throws SQLException{
 	}
 }
 
+public int delete(Connection conn, int no, String title) throws SQLException{
+	try(PreparedStatement pstmt= conn.prepareStatement("delete from article where article_no = ?")){
+		pstmt.setInt(1, no);
+		return pstmt.executeUpdate();
+		
+			
+	}
+}
 
 
 }
