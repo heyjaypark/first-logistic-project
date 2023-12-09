@@ -9,53 +9,55 @@ import java.util.Date;
 
 import jdbc.JdbcUtil;
 import product.model.Product;
+import sales.model.Sales;
 
 public class ProductDao {
 	
-	public Product selectById(Connection conn, String id) throws SQLException {
+	public Product selectById(Connection conn, int p_no) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select * from member where memberid = ?");
-			pstmt.setString(1, id);
+			pstmt = conn.prepareStatement("select * from member where p_no = ?");
+			pstmt.setInt(1, p_no);
 			rs = pstmt.executeQuery();
-			Product member = null;
+			Product product = null;
 			if(rs.next()) {
-				member = new Product(
-						rs.getString("memberid"),
-						rs.getString("name"),
-						rs.getString("password"),
-						toDate(rs.getTimestamp("regdate")));
+				product = new Product(
+						rs.getInt("p_no"),
+						rs.getString("p_name"),
+						rs.getInt("p_seoul"),
+						rs.getInt("p_suwon"),
+						rs.getInt("p_incheon"),
+						rs.getInt("price")
+						);
 							
 			}
-			return member;
+			return product;
 		} finally {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 		}
 	}
 	
-	private Date toDate(Timestamp date) {
-		return date == null ? null : new Date(date.getTime());
-	}
 	
-	public void insert(Connection conn, Product mem) throws SQLException {
-		try(PreparedStatement pstmt =
-				conn.prepareStatement("insert into member values(?,?,?,?)")) {
-			pstmt.setString(1, mem.getId());
-			pstmt.setString(2, mem.getName());
-			pstmt.setString(3, mem.getPassword());
-			pstmt.setTimestamp(4, new Timestamp(mem.getRegDate().getTime()));
+	public void insert(Connection conn, Product prod) throws SQLException {
+		try (PreparedStatement pstmt = conn
+				.prepareStatement("insert into product_list values(?S_SALES_LIST.NEXTVAL,?,?,?,?)")) {
+			pstmt.setString(1, prod.getP_Name());
+			pstmt.setInt(2, prod.getP_Seoul());
+			pstmt.setInt(3, prod.getP_Suwon());
+			pstmt.setInt(4, prod.getP_Incheon());
+			pstmt.setInt(5, prod.getPrice());
 			pstmt.executeUpdate();
 		}
 	}
 		
-		public void update(Connection conn, Product member) throws SQLException {
+		public void update(Connection conn, Product prod) throws SQLException {
 			try (PreparedStatement pstmt = conn.prepareStatement(
-					"update member set name = ?, password = ? where memberid = ?")) {
-				pstmt.setString(1, member.getName());
-				pstmt.setString(2, member.getPassword());
-				pstmt.setString(3, member.getId());
+					"update product_list set p_seoul = p_seoul + ?, p_suwon = p_suwon + ?, p_incheon = p_incheon + ? where p_no = ?")) {
+				pstmt.setInt(1, prod.getP_Seoul());
+				pstmt.setInt(2, prod.getP_Suwon());
+				pstmt.setInt(3, prod.getP_Incheon());
 				pstmt.executeUpdate();
 			}
 		
