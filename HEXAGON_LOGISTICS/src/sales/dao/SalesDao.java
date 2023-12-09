@@ -17,7 +17,7 @@ public class SalesDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select * from member where memberid = ?");
+			pstmt = conn.prepareStatement("select * from product_list where p_no = ?");
 			pstmt.setString(1, p_No);
 			rs = pstmt.executeQuery();
 			Product product = null;
@@ -40,7 +40,7 @@ public class SalesDao {
 
 	public void insert(Connection conn, Sales sal) throws SQLException {
 		try (PreparedStatement pstmt = conn
-				.prepareStatement("insert into member values(S_SALES_LIST.NEXTVAL,?,?,?,?,?)")) {
+				.prepareStatement("insert into sales_list values(S_SALES_LIST.NEXTVAL,?,?,?,?,?)")) {
 			pstmt.setInt(1, sal.getS_Num());
 			pstmt.setInt(2, sal.getP_No());
 			pstmt.setInt(2, sal.getS_Seoul());
@@ -51,12 +51,12 @@ public class SalesDao {
 		}
 	}
 
-	public void update(Connection conn, Product product) throws SQLException {
+	public void update(Connection conn, Sales sal) throws SQLException {
 		try (PreparedStatement pstmt = conn.prepareStatement(
 				"update PRODUCT_LIST set P_SEOUL=P_SEOUL-?, P_SUWON=P_SUWON-?,P_INCHEON=P_INCHEON-?")) {
-			pstmt.setInt(1, product.getP_Seoul());
-			pstmt.setInt(2, product.getP_Suwon());
-			pstmt.setInt(3, product.getP_Incheon());
+			pstmt.setInt(1, sal.getS_Seoul());
+			pstmt.setInt(2, sal.getS_Suwon());
+			pstmt.setInt(3, sal.getS_Incheon());
 			pstmt.executeUpdate();
 		}
 

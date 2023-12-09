@@ -17,7 +17,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select * from member where p_no = ?");
+			pstmt = conn.prepareStatement("select * from product_list where p_no = ?");
 			pstmt.setInt(1, p_no);
 			rs = pstmt.executeQuery();
 			Product product = null;
@@ -42,7 +42,7 @@ public class ProductDao {
 	
 	public void insert(Connection conn, Product prod) throws SQLException {
 		try (PreparedStatement pstmt = conn
-				.prepareStatement("insert into product_list values(?S_SALES_LIST.NEXTVAL,?,?,?,?)")) {
+				.prepareStatement("insert into product_list values(S_PRODUCT_LIST.NEXTVAL,?,?,?,?,?)")) {
 			pstmt.setString(1, prod.getP_Name());
 			pstmt.setInt(2, prod.getP_Seoul());
 			pstmt.setInt(3, prod.getP_Suwon());
